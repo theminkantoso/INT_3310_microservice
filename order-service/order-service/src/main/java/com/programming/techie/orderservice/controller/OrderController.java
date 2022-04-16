@@ -40,6 +40,9 @@ public class OrderController {
         java.util.function.Supplier<Boolean> booleanSupplier = () -> orderDto.getOrderLineItemsList().stream()
                 .allMatch(lineItem -> {
                     log.info("Making Call to Inventory Service for SkuCode {}", lineItem.getSkuCode());
+                    if(!inventoryClient.checkStock(lineItem.getSkuCode())) {
+                        log.error("Inventory {} not in stock", lineItem.getSkuCode());
+                    }
                     return inventoryClient.checkStock(lineItem.getSkuCode());
                 });
         boolean productsInStock = circuitBreaker.run(booleanSupplier, throwable -> handleErrorCase());
@@ -54,6 +57,7 @@ public class OrderController {
             streamBridge.send("notificationEventSupplier-out-0", MessageBuilder.withPayload(order.getId()).build());
             return "Order Place Successfully";
         } else {
+            log.error("Order Failed - One of the Product in your Order is out of stock");
             return "Order Failed - One of the Product in your Order is out of stock";
         }
     }

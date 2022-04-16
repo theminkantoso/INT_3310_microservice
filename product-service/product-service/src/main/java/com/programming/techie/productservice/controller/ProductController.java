@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
@@ -21,9 +22,21 @@ public class ProductController {
         return productRepository.findAll();
     }
 
+    @GetMapping("/{proId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<Product> findById(@PathVariable("proId") String proId) {
+        return productRepository.findById(proId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(@RequestBody Product product) {
         productRepository.save(product);
+    }
+
+    @DeleteMapping("/{proId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProduct(@PathVariable("proId") String proId) {
+        productRepository.deleteById(proId);
     }
 }
