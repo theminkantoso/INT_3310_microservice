@@ -22,6 +22,7 @@ public class InventoryRestController {
         log.info("Checking stock for product with skucode - " + skuCode);
         Inventory inventory = inventoryRepository.findBySkuCode(skuCode)
                 .orElseThrow(() -> new RuntimeException("Cannot Find Product by sku code " + skuCode));
+        log.info("Available in stock: " + inventory.getStock());
         return inventory.getStock() > 0;
     }
 }
