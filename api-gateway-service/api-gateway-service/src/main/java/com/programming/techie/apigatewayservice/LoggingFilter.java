@@ -28,8 +28,16 @@ public class LoggingFilter implements GlobalFilter {
         System.out.println(originalUri);
         Route route = exchange.getAttribute(GATEWAY_ROUTE_ATTR);
         URI routeUri = exchange.getAttribute(GATEWAY_REQUEST_URL_ATTR);
-        log.info("Incoming request " + originalUri + " is routed to id: " + route.getId()
-                + ", uri:" + routeUri);
+        assert route != null;
+        String service_name = route.getId().split("-")[0];
+        assert routeUri != null;
+        if(!originalUri.contains(route.getId()) || !routeUri.toString().contains(service_name)) {
+            log.error("Wrong service or wrong path -> Incoming request " + originalUri + " is routed to id: " + route.getId()
+                    + ", uri:" + routeUri);
+        } else {
+            log.info("Incoming request " + originalUri + " is routed to id: " + route.getId()
+                        + ", uri:" + routeUri);
+        }
         return chain.filter(exchange);
     }
 }
