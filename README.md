@@ -36,10 +36,10 @@ This is a simple Springboot microservice system. The main purpose of this system
 
 ## Zipkin
 ### Dashboard
-![Dashboard](images/zipkin1.png)<br/>
+![Dashboard](images/zipkin.png)<br/>
 
 ### Trace and spans
-![TraceSpan](images/zipkin2.png)<br/>
+![TraceSpan](images/tracespans.png)<br/>
 
 <b>This is a group project, credits goes to me and my teammate!</b>
 
