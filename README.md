@@ -32,7 +32,7 @@ This is a simple Springboot microservice system. The main purpose of this system
 ### Dashboard
 ![Dashboard](images/dashboard1.png)<br/>
 ### Chart
-![Chart](images/chart1.png)<br/>
+![Chart](images/chart1.jpg)<br/>
 
 ## Zipkin
 ### Dashboard
@@ -40,4 +40,6 @@ This is a simple Springboot microservice system. The main purpose of this system
 
 ### Trace and spans
 ![TraceSpan](images/zipkin2.png)<br/>
+
+<b>This is a group project, credits goes to me and my teammate!</b>
 
